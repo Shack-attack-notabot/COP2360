@@ -1,0 +1,57 @@
+using System;
+
+public class Octopus
+{
+    public int Age { get; set; }
+    private readonly int legs = 8;
+    private readonly int eyes = 1;
+
+    public Octopus(int age)
+    {
+        Age = age;
+    }
+
+    public void PrintInfo()
+    {
+        Console.WriteLine($"Age: {Age}, Legs: {legs}, Eyes: {eyes}");
+    }
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        // Create an instance of the Octopus class
+        var octopus = new Octopus(10);
+        octopus.PrintInfo();
+
+        // Create an instance of the Stock class
+        var stock = new Stock { CurrentPrice = 50, SharesOwned = 100 };
+        Console.WriteLine(stock.Worth);
+
+        // Create an instance of the Sentence class
+        var sentence = new Sentence();
+        Console.WriteLine(sentence[3]);  // fox
+        sentence[3] = "kangaroo";
+        Console.WriteLine(sentence[3]);  // kangaroo
+    }
+}
+
+public class Stock
+{
+    public decimal CurrentPrice { get; set; }
+    public decimal SharesOwned { get; set; }
+
+    public decimal Worth => CurrentPrice * SharesOwned;
+}
+
+public class Sentence
+{
+    private string[] words = "The quick brown fox".Split();
+
+    public string this[int wordNum]
+    {
+        get { return words[wordNum]; }
+        set { words[wordNum] = value; }
+    }
+}
