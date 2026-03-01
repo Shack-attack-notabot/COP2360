@@ -1,0 +1,64 @@
+using System;
+
+namespace DivisionExceptionHandler
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Division and Exception Handling Example");
+            
+            Console.WriteLine("\nTest Case 1: Valid division");
+            DivideStrings("10", "2");
+            
+            Console.WriteLine("\nTest Case 2: Division by zero");
+            DivideStrings("10", "0");
+            
+            Console.WriteLine("\nTest Case 3: Invalid first number");
+            DivideStrings("abc", "5");
+            
+            Console.WriteLine("\nTest Case 4: Invalid second number");
+            DivideStrings("15", "xyz");
+            
+            Console.WriteLine("\nTest Case 5: Both numbers invalid");
+            DivideStrings("hello", "world");
+
+        }
+        
+        static void DivideStrings(string str1, string str2)
+        {
+            Console.WriteLine($"\nAttempting: {str1} ÷ {str2}");
+            
+            try
+            {
+                int num1 = int.Parse(str1);
+                int num2 = int.Parse(str2);
+                
+                int result = num1 / num2;
+                
+                Console.WriteLine($"✓ Success! Result: {num1} ÷ {num2} = {result}");
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("✗ Error: One or both inputs are not valid integers.");
+                Console.WriteLine("  Please ensure you enter only whole numbers (e.g., 42, -15, 0).");
+            }
+            catch (DivideByZeroException)
+            {
+                Console.WriteLine("✗ Error: Cannot divide by zero.");
+                Console.WriteLine("  Division by zero is mathematically undefined.");
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("✗ Error: Number is too large or too small.");
+                Console.WriteLine("  Valid integer range: -2,147,483,648 to 2,147,483,647");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"✗ Unexpected error: {ex.GetType().Name}");
+                Console.WriteLine($"  Message: {ex.Message}");
+            }
+        }
+        
+        }
+    }
